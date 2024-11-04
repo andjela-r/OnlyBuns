@@ -1,4 +1,7 @@
 import Image from "next/image";
+import {Greet} from "@/app/components/greet";
+import {Counter} from "@/app/components/counter";
+
 
 export default function Home() {
   return (
@@ -8,10 +11,12 @@ export default function Home() {
           className="dark:invert"
           src="/next.svg"
           alt="Next.js logo"
-          width={180}
-          height={38}
+          width={360}
+          height={76}
           priority
         />
+        <Greet/>
+        <Counter/>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
