@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "post", schema = "public")
@@ -14,11 +13,11 @@ import java.util.UUID;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "registereduserid")
-    public RegisteredUser registeredUser;
+    @JoinColumn
+    public RegisteredUser registereduser;
 
     @Column(nullable = false)
     public String description;
@@ -26,14 +25,14 @@ public class Post {
     @Column(nullable = false)
     public String image;  // Link to the image
 
-    @Column(name="compressedimage")
-    public String compressedImage;
+    @Column
+    public String compressedimage;
 
     @Column
     public String location;
 
-    @Column(name="timecreated")
-    public LocalDateTime timeCreated = LocalDateTime.now();
+    @Column
+    public LocalDateTime timecreated = LocalDateTime.now();
 
     @Column
     public int likes;
@@ -41,9 +40,9 @@ public class Post {
     @Column
     public int comments;
 
-    @Column(name="isdeleted")
-    public boolean isDeleted;
+    @Column
+    public boolean isdeleted;
 
-    @Column(name="isforad")
-    public boolean isForAd;
+    @Column
+    public boolean isforad;
 }

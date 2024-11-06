@@ -15,6 +15,6 @@ public class PostService {
     }
 
     public List<Post> getRecentPosts() {
-        return postRepository.findAllByOrderByTimeCreatedDesc();  // Return the latest posts
+        return postRepository.findAllByOrderByTimecreatedDesc();  // Return the latest posts
     }
 }

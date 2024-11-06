@@ -21,7 +21,7 @@ export interface Post {
     image: string | null;
     compressedImage: string | null;
     location: string | null;
-    timeCreated: string;
+    timecreated: string;
     likes: number;
     comments: number;
     isDeleted: boolean;

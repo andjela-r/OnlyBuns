@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface PostRepository extends JpaRepository<Post, UUID> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findAllByOrderByTimeCreatedDesc();  // Retrieve posts ordered by creation date (newest first)
+    List<Post> findAllByOrderByTimecreatedDesc();  // Retrieve posts ordered by creation date (newest first)
 
 }

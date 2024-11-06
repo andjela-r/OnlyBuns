@@ -14,7 +14,7 @@ import java.util.UUID;
 public class RegisteredUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column
     public String username;

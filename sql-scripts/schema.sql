@@ -1,9 +1,12 @@
 -- RegisteredUser Table
 DROP TABLE IF EXISTS "registereduser" CASCADE;
-DROP TABLE IF EXISTS "post";
+DROP TABLE IF EXISTS "post" CASCADE;
+DROP TABLE IF EXISTS "following";
+DROP TABLE IF EXISTS "like";
+DROP TABLE IF EXISTS "comment";
 
 CREATE TABLE "registereduser" (
-                      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                      id SERIAL PRIMARY KEY,
                       username VARCHAR(50) UNIQUE NOT NULL,
                       password VARCHAR(255) NOT NULL,
                       name VARCHAR(50),
@@ -21,48 +24,48 @@ CREATE TABLE "registereduser" (
 
 -- Post Table
 CREATE TABLE "post" (
-                      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                      registeredUserId UUID NOT NULL,
+                      id SERIAL PRIMARY KEY,
+                      registereduserid INT NOT NULL,
                       description TEXT,
                       image TEXT,
-                      compressed_image TEXT,
+                      compressedimage TEXT,
                       location TEXT,
-                      timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                      timecreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                       likes INT DEFAULT 0,
                       comments INT DEFAULT 0,
-                      isDeleted BOOLEAN DEFAULT FALSE,
-                      isForAd BOOLEAN DEFAULT FALSE,
-                      FOREIGN KEY (registeredUserId) REFERENCES registereduser(id) ON DELETE CASCADE
+                      isdeleted BOOLEAN DEFAULT FALSE,
+                      isforad BOOLEAN DEFAULT FALSE,
+                      FOREIGN KEY (registereduserid) REFERENCES registereduser(id) ON DELETE CASCADE
 );
--- Following Table
--- CREATE TABLE Following (
---                            idFollower INT,
---                            idFollowing INT,
---                            PRIMARY KEY (idFollower, idFollowing),
---                            FOREIGN KEY (idFollower) REFERENCES RegisteredUser(userID) ON DELETE CASCADE,
---                            FOREIGN KEY (idFollowing) REFERENCES RegisteredUser(userID) ON DELETE CASCADE,
---                            CONSTRAINT chk_self_follow CHECK (idFollower <> idFollowing)
--- );
+--Following Table
+CREATE TABLE "following" (
+                           idfollower INT,
+                           idfollowing INT,
+                           PRIMARY KEY (idfollower, idfollowing),
+                           FOREIGN KEY (idfollower) REFERENCES registereduser(id) ON DELETE CASCADE,
+                           FOREIGN KEY (idfollowing) REFERENCES registereduser(id) ON DELETE CASCADE,
+                           CONSTRAINT chk_self_follow CHECK (idFollower <> idFollowing)
+);
 
--- Like Table
--- CREATE TABLE Like (
---                       postID INT,
---                       userID INT,
---                       PRIMARY KEY (postID, userID),
---                       FOREIGN KEY (postID) REFERENCES Post(postID) ON DELETE CASCADE,
---                       FOREIGN KEY (userID) REFERENCES RegisteredUser(userID) ON DELETE CASCADE
--- );
---
+--Like Table
+CREATE TABLE "like" (
+                      postid INT,
+                      userid INT,
+                      PRIMARY KEY (postid, userid),
+                      FOREIGN KEY (postid) REFERENCES post(id) ON DELETE CASCADE,
+                      FOREIGN KEY (userid) REFERENCES registereduser(id) ON DELETE CASCADE
+);
+
 -- -- Comment Table
--- CREATE TABLE Comment (
---                          commentID SERIAL PRIMARY KEY,
---                          content TEXT NOT NULL,
---                          userID INT NOT NULL,
---                          postID INT NOT NULL,
---                          timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---                          FOREIGN KEY (userID) REFERENCES RegisteredUser(userID) ON DELETE CASCADE,
---                          FOREIGN KEY (postID) REFERENCES Post(postID) ON DELETE CASCADE
--- );
+CREATE TABLE "comment" (
+                         commentid SERIAL PRIMARY KEY,
+                         content TEXT NOT NULL,
+                         userid INT NOT NULL,
+                         postid INT NOT NULL,
+                         timecreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         FOREIGN KEY (userid) REFERENCES registereduser(id) ON DELETE CASCADE,
+                         FOREIGN KEY (postid) REFERENCES post(id) ON DELETE CASCADE
+);
 --
 -- -- Chat Table
 -- CREATE TABLE Chat (

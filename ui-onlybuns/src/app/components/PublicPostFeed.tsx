@@ -32,7 +32,7 @@ const PublicPostFeed: React.FC = () => {
                     </h3>
                     <p className="text-gray-800 text-xl">{post.description}</p>
                     <img src={post.image || '/placeholder.png'} alt="Post" className="w-full h-auto mt-2 rounded"/>
-                    <p className="text-gray-800 text-sm">{new Date(post.timeCreated).toLocaleString()}</p>
+                    <p className="text-gray-800 text-sm">{new Date(post.timecreated).toLocaleString()}</p>
                     <hr className="border-t border-gray-300 my-4"/>
                     <div className="flex justify-between items-center text-gray-600 text-sm">
                         <span>{post.likes} Likes</span>
