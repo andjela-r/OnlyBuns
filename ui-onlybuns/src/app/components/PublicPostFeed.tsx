@@ -24,15 +24,20 @@ const PublicPostFeed: React.FC = () => {
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="bg-white-20 container mx-auto p-4 flex flex-col items-center max-w-4xl">
             {posts.map((post) => (
-                <div key={post.id} className="bg-white p-4 rounded shadow mb-4">
-                    <h3 className="text-gray-800 font-bold">
+                <div key={post.id} className="bg-white-20 p-4 rounded shadow-md mb-4 w-full max-w-2xl">
+                    <h3 className="text-gray-800">
                         {post.registeredUser.name} {post.registeredUser.surname}
                     </h3>
-                    <p className="text-gray-800">{post.description}</p>
-                    <img src={post.image || '/placeholder.png'} alt="Post" className="w-full h-auto mt-2 rounded" />
-                    <p className="text-gray-500 text-sm">{new Date(post.timeCreated).toLocaleString()}</p>
+                    <p className="text-gray-800 text-xl">{post.description}</p>
+                    <img src={post.image || '/placeholder.png'} alt="Post" className="w-full h-auto mt-2 rounded"/>
+                    <p className="text-gray-800 text-sm">{new Date(post.timeCreated).toLocaleString()}</p>
+                    <hr className="border-t border-gray-300 my-4"/>
+                    <div className="flex justify-between items-center text-gray-600 text-sm">
+                        <span>{post.likes} Likes</span>
+                        <span>{post.comments} Comments</span>
+                    </div>
                 </div>
             ))}
         </div>
