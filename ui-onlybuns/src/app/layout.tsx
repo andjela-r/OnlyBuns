@@ -3,6 +3,7 @@ import "./globals.css";
 import {Navigation} from "@/app/components/navigation";
 import Image from 'next/image'
 import {roboto_mono, roboto} from "@/app/fonts/fonts";
+import Link from "next/link"
 import React from "react";
 
 export const metadata: Metadata = {
@@ -29,7 +30,11 @@ export default function RootLayout({
                height={20}
                alt="Picture of the author"
         />
-        <h1 className={`${roboto.className} text-4xl font-extrabold text-pink-500 ml-3 drop-shadow-[0_1.1px_1.1px_rgba(0,0,0,0.5)]`}>OnlyBuns</h1>
+        <h1 className={`${roboto.className} text-4xl font-extrabold text-pink-500 ml-3 drop-shadow-[0_1.1px_1.1px_rgba(0,0,0,0.5)]`}>
+          <Link href="/">
+            OnlyBuns
+          </Link>
+        </h1>
 
       </div>
       <div className="header-right">

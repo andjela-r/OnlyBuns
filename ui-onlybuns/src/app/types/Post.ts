@@ -16,7 +16,7 @@ export interface RegisteredUser {
 
 export interface Post {
     id: string;
-    registeredUser: RegisteredUser;  // User information
+    registereduser: RegisteredUser;  // User information
     description: string;
     image: string | null;
     compressedImage: string | null;

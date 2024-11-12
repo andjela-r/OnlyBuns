@@ -10,7 +10,7 @@ export default function Login() {
             <div className="flex bg-white p-8 rounded-xl shadow-lg w-full max-w-3xl">
                 <div className="w-1/2 h-full">
                     <img
-                        src="https://e0.pxfuel.com/wallpapers/140/937/desktop-wallpaper-cute-iphone-and-background-in-2020-cute-bunny-cute-animals-iphone-rabbit.jpg" // Replace with your image path
+                        src="images/login.jpg" // Replace with your image path
                         alt="Register Image"
                         className="w-full h-full object-cover rounded-l-xl"
                     />

@@ -1,6 +1,4 @@
 "use client"
-
-
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
 
@@ -60,9 +58,33 @@ export default function RegisterForm() {
             return;
         }
 
-        // Simulate sending account activation email
-        setFormSuccess(true);
-        setIsSubmitting(false);
+        try {
+            // Send a POST request to your backend
+            const response = await fetch('http://localhost:8080/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                // Handle unsuccessful registration
+                const errorData = await response.json();
+                setErrors(errorData.errors || {});
+                setIsSubmitting(false);
+                return;
+            }
+
+            // Handle success (e.g., show a success message or redirect to another page)
+            setFormSuccess(true);
+        } catch (error) {
+            // Handle any errors that occur during the fetch request
+            console.error('Error registering user:', error);
+            setErrors({ general: 'An error occurred while registering. Please try again.' });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -70,7 +92,7 @@ export default function RegisterForm() {
             <div className="flex bg-white p-8 rounded-xl shadow-lg w-full max-w-5xl">
                 <div className="w-1/2 h-full center">
                     <img
-                        src="https://www.warrenphotographic.co.uk/photography/bigs/38998-White-rabbit-standing-up-on-green-background.jpg" // Replace with your image path
+                        src="images/register.jpg"
                         alt="Register Image"
                         className="w-full h-full object-cover rounded-l-xl"
                     />

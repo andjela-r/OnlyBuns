@@ -1,10 +1,12 @@
--- RegisteredUser Table
+-- Drop Tables
+DROP TABLE IF EXISTS "role" CASCADE;
 DROP TABLE IF EXISTS "registereduser" CASCADE;
 DROP TABLE IF EXISTS "post" CASCADE;
 DROP TABLE IF EXISTS "following";
 DROP TABLE IF EXISTS "like";
 DROP TABLE IF EXISTS "comment";
 
+-- RegisteredUser Table
 CREATE TABLE "registereduser" (
                       id SERIAL PRIMARY KEY,
                       username VARCHAR(50) UNIQUE NOT NULL,
@@ -44,7 +46,7 @@ CREATE TABLE "following" (
                            PRIMARY KEY (idfollower, idfollowing),
                            FOREIGN KEY (idfollower) REFERENCES registereduser(id) ON DELETE CASCADE,
                            FOREIGN KEY (idfollowing) REFERENCES registereduser(id) ON DELETE CASCADE,
-                           CONSTRAINT chk_self_follow CHECK (idFollower <> idFollowing)
+                           CONSTRAINT chk_self_follow CHECK (idfollower <> idfollowing)
 );
 
 --Like Table
@@ -58,13 +60,26 @@ CREATE TABLE "like" (
 
 -- -- Comment Table
 CREATE TABLE "comment" (
-                         commentid SERIAL PRIMARY KEY,
+                         id SERIAL PRIMARY KEY,
                          content TEXT NOT NULL,
                          userid INT NOT NULL,
                          postid INT NOT NULL,
                          timecreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                          FOREIGN KEY (userid) REFERENCES registereduser(id) ON DELETE CASCADE,
                          FOREIGN KEY (postid) REFERENCES post(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ROLE (
+					id SERIAL PRIMARY KEY,
+					name TEXT NOT NULL
+);
+
+CREATE TABLE USER_ROLE (
+					id SERIAL PRIMARY KEY,
+					user_id INT NOT NULL,
+					role_id INT NOT NULL,
+					FOREIGN KEY (user_id) REFERENCES registereduser(id) ON DELETE CASCADE,
+					FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
 --
 -- -- Chat Table
